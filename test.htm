@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONP跨域POST请求</title>
+</head>
+<body>
+
+    <h1>JSONP跨域POST请求示例</h1>
+    
+    <div id="onlineCount"></div>
+
+    <script>
+        // 定义一个全局的回调函数
+        function handleResponse(data) {
+            // 在网页中显示解析后的在线人数
+            const onlineCountElement = document.getElementById('onlineCount');
+            onlineCountElement.innerHTML = `在线人数：${data}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // 准备发送的数据
+            const postData = new URLSearchParams();
+            postData.append('UserName', 'S7E5554EF4A4E691C19C7E47DDD4D256');
+            postData.append('Type', '3');
+
+            // 创建一个动态的script标签
+            const script = document.createElement('script');
+            
+            // 设置script标签的src属性，包括JSONP回调函数和参数
+            script.src = `https://vip1.eydata.net/752289cd268b02f4?callback=handleResponse&${postData.toString()}`;
+
+            // 将script标签添加到页面中
+            document.head.appendChild(script);
+        });
+    </script>
+
+</body>
+</html>
